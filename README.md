@@ -56,9 +56,7 @@
 * GitHub
 * VS Code
 
-
 🗂️ Project Structure
-
 CropDefender-AI/
 │
 ├── app.py                         # Flask backend and API
