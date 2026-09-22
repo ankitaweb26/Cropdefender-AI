@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CropDefender AI</title>
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+   
+    <link rel="stylesheet" href="{{ url_for('static', filename='../static/css/output.css') }}">
+   
+
+</head>
+<body>
+    
+
+
+<header>
+
+    <a href="#" class="logo">CropDefender<span class="fas fa-globe-asia"></span>AI</a>
+
+    <div id="menu" class="fas fa-bars"></div>
+
+    <nav class="navbar">
+        <a href="/">home</a>
+        <a href="/">team</a>
+    </nav>
+
+</header>
+
+
+<section class="home" id="home">
+
+    <div class="content">
+        <h3>Save the Potato from Diseases</h3>
+    </div>
+
+</section>
+
+
+
+
+<div class="container-5">
+<center>
+    <div class='cont'>
+    </div>
+
+
+    <h3> <br> Disease Prediction : <span>{{data[0]}}</span> </h3>
+
+    <h3> <br> Treatment : <span>{{data[1]}}</span> </h3>
+
+    <br><br><br><br><br><br><br><br><br><img src="{{url_for('load_img')}}" alt='img'>
+    <a href="/inputpotato" class='btn'>go back</a>
+
+</center>
+</div>
+
+
+
+<div class="footer">
+    <h1 class="credit"> created by <a href="#"> CropDefender AI Team </a> | all rights reserved@2024 </h1>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- jquery cdn link  -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<!-- custom js file link  -->
+<script src="../static/js/script.js"></script>
+
+
+</body>
+</html>

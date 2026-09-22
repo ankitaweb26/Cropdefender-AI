@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CropDefender AI - Potato Disease Detection</title>
+
+ 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+   
+    <link rel="stylesheet" href="{{ url_for('static', filename='../static/css/prediction_potato.css') }}">
+
+</head>
+<body>
+    
+
+
+<header>
+    <a href="#" class="logo">CropDefender<span class="fas fa-globe-asia"></span>AI</a>
+    <div id="menu" class="fas fa-bars"></div>
+    <nav class="navbar">
+        <a href="/">home</a>
+        <a href="/">team</a>
+    </nav>
+</header>
+
+
+<section class="home" id="home">
+    <div class="content">
+        <h3>Save the Potato from Diseases</h3>
+    </div>
+</section>
+
+
+<div class="icons-container" style="text-align: center;">
+    <form method="POST" action="{{ url_for('predictionpotato') }}" enctype="multipart/form-data" style="display: inline-block;">
+        <label for="fileUpload">Upload Image</label>
+        <input type="file" id="fileUpload" name="image" accept="image/*" class="btn" style="display: block; margin: 0 auto;"><br><br><br>
+        
+        
+        <video id="webcam" width="300" height="200" autoplay style="display: block; margin: 0 auto;"></video><br>
+        <button type="button" onclick="captureImage()" class="btn" style="display: block; margin: 0 auto;">Capture Image</button><br><br>
+        
+        <input type="submit" class="btn" style="display: block; margin: 0 auto;" value="Upload and Predict">
+        
+    </form>
+</div>
+
+
+<div class="footer">
+    <h1 class="credit"> created by <a href="#"> CropDefender AI Team </a> | all rights reserved @2024 </h1>
+</div>
+
+<script>
+    const video = document.getElementById('webcam');
+    const fileInput = document.getElementById('fileUpload');
+
+   
+    navigator.mediaDevices.getUserMedia({ video: true })
+        .then((stream) => {
+            video.srcObject = stream;
+        })
+        .catch((err) => {
+            console.error('Error accessing webcam: ', err);
+        });
+
+   
+    function captureImage() {
+        const canvas = document.createElement('canvas');
+        const context = canvas.getContext('2d');
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        context.drawImage(video, 0, 0, canvas.width, canvas.height);
+        const imageDataUrl = canvas.toDataURL('image/jpeg'); 
+        
+       
+        const imageBlob = dataURLtoBlob(imageDataUrl);
+        const imageFile = new File([imageBlob], 'captured-image.jpg', { type: 'image/jpeg' });
+        const dataTransfer = new DataTransfer();
+        dataTransfer.items.add(imageFile);
+        fileInput.files = dataTransfer.files;
+    }
+
+    function dataURLtoBlob(dataURL) {
+        const byteString = atob(dataURL.split(',')[1]);
+        const mimeString = dataURL.split(',')[0].split(':')[1].split(';')[0];
+        const arrayBuffer = new ArrayBuffer(byteString.length);
+        const uintArray = new Uint8Array(arrayBuffer);
+        for (let i = 0; i < byteString.length; i++) {
+            uintArray[i] = byteString.charCodeAt(i);
+        }
+        return new Blob([uintArray], { type: mimeString });
+    }
+</script>
+
+</body>
+</html>
